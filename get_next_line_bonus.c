@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/06 15:42:02 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:11:21 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	clean_stash(t_list **stash)
 {
@@ -119,24 +119,25 @@ void	readstash(int fd, t_list **stash)
 		free(buff);
 	}
 }
+// Max linux fd is 1024, therefore set the last stash (stash[1024] = NULL)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*stash = NULL;
+	static t_list	*stash[1024] = {NULL};
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	readstash(fd, &stash);
-	if (!stash)
+	readstash(fd, &stash[fd]);
+	if (!stash[fd])
 		return (NULL);
 	line = NULL;
-	extract_line(stash, &line);
-	clean_stash(&stash);
+	extract_line(stash[fd], &line);
+	clean_stash(&stash[fd]);
 	if (line[0] == '\0')
 	{
-		ft_free_stash(stash);
-		stash = NULL;
+		ft_free_stash(stash[fd]);
+		stash[fd] = NULL;
 		free(line);
 		return (NULL);
 	}
