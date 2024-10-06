@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:58:36 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/06 10:22:14 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/06 12:15:23 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
-void	readstash( int fd, t_list **stash, int status);
+void	readstash( int fd, t_list **stash);
 void	ft_append(t_list **stash, char *buff, int status);
 void	clean_stash(t_list **stash);
 void	extract_line(t_list *stash, char **line);

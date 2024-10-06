@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/06 10:21:39 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/06 12:15:19 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ int	ft_isnotnewline(t_list *stash)
 		return (1);
 	i = 0;
 	current = ft_getlastnode(stash);
-	while (current -> content[i])
+	while (current->content[i])
 	{
-		if (current -> content[i++] == '\n')
+		if (current->content[i] == '\n')
 			return (0);
+		i++;
 	}
 	return (1);
 }
@@ -34,7 +35,7 @@ t_list	*ft_getlastnode(t_list *stash)
 	t_list	*current;
 
 	current = stash;
-	while (current && current -> next)
+	while (current && current->next)
 		current = current->next;
 	return (current);
 }
