@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:58:36 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/06 16:12:53 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:00:40 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
-void	readstash( int fd, t_list **stash);
-void	ft_append(t_list **stash, char *buff, int status);
-void	clean_stash(t_list **stash);
-void	extract_line(t_list *stash, char **line);
+void	readlst( int fd, t_list **lst);
+void	append(t_list **lst, char *buff, int status);
+void	clean_lst(t_list **lst);
+void	extract_line(t_list *lst, char **line);
 
-int		ft_isnotnewline(t_list *stash);
-t_list	*ft_getlastnode(t_list *stash);
-void	ft_create_line(char **line, t_list *stash);
-void	ft_free_stash(t_list *stash);
-int		ft_strlen(char *str);
+int		ft_isnotnewline(t_list *lst);
+t_list	*ft_getlastnode(t_list *lst);
+void	ft_create_line(char **line, t_list *lst);
+void	ft_free_lst(t_list *lst);
+char	*ft_strduplen(char *s1);
 
 #endif

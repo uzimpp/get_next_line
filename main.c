@@ -6,20 +6,22 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:46:24 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/06 16:46:27 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:08:46 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// #include "get_next_line_bonus.h"
+#include "get_next_line.h"
 #include <stdio.h>
 #include <fcntl.h>
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	int		fd;
 	char	*str;
 	int		i;
 
-	fd = open("./tb", O_RDONLY);
+	fd = open("./test", O_RDONLY);
 	i = 1;
 	str = get_next_line(fd);
 	printf("Time %d: %s", i, str);
