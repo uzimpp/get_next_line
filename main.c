@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:46:24 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/09 02:23:03 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:58:37 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 // cc -Wall -Wextra -Werror *_bonus.c *_bonus.h main.c
 #include "get_next_line_bonus.h"
 
-#define NUM_FILES 3
+#ifndef NUM_FILES
+# define NUM_FILES 3
+#endif
 
 void	test_mandatory(void)
 {
