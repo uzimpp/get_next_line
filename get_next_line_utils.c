@@ -6,20 +6,20 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/16 19:23:10 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:09:03 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_isnotnewline(t_list *current)
+int	ft_isnotnewline(t_list *node)
 {
 	int	i;
 
 	i = 0;
-	while (current->content[i])
+	while ((node)->content[i])
 	{
-		if (current->content[i] == '\n')
+		if ((node)->content[i] == '\n')
 			return (0);
 		i++;
 	}

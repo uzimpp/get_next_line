@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:58:36 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/16 19:32:04 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:09:18 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
-void	readlst(int fd, t_list **lst, t_list **current);
-// void	readlst(int fd, t_list **lst);
+// void	readlst(int fd, t_list **lst, t_list **current);
+void	readlst(int fd, t_list **lst);
 void	append(t_list **lst, char *buff, t_list **current, int n);
-void	clean_lst(t_list **lst, t_list **current);
-// void	clean_lst(t_list **lst);
+// void	clean_lst(t_list **lst, t_list **current);
+void	clean_lst(t_list **lst);
 void	extract_line(t_list *lst, char **line);
 
-int		ft_isnotnewline(t_list *lst);
+int		ft_isnotnewline(t_list *node);
 t_list	*ft_getcurrentnode(t_list *lst);
 void	ft_create_line(char **line, t_list *lst);
 void	ft_free_lst(t_list *lst);

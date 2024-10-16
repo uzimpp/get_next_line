@@ -6,23 +6,25 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/16 19:34:09 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:10:55 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	clean_lst(t_list **lst, t_list **current)
+void	clean_lst(t_list **lst)
 {
+	t_list	*current;
 	char	*line;
 	int		i;
 
+	current = ft_getcurrentnode(*lst);
 	i = 0;
-	while ((*current)->content[i] && (*current)->content[i] != '\n')
+	while (current->content[i] && current->content[i] != '\n')
 		i++;
-	if ((*current)->content[i] == '\n')
+	if (current->content[i] == '\n')
 		i++;
-	line = ft_strduplen((*current)->content + i);
+	line = ft_strduplen(current->content + i);
 	if (!line)
 		return ;
 	ft_free_lst(*lst);
@@ -90,19 +92,21 @@ void	append(t_list **lst, char *buff, t_list **current, int n)
 	*current = node;
 }
 
-void	readlst(int fd, t_list **lst, t_list **current)
+void	readlst(int fd, t_list **lst)
 {
 	char	*buff;
 	int		n;
+	t_list	*current;
 
 	n = 1;
-	while (lst && ft_isnotnewline(*current) && n != 0)
+	current = *lst;
+	while (ft_isnotnewline(current) && n != 0)
 	{
 		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buff)
 			return ;
 		n = (int)read(fd, buff, BUFFER_SIZE);
-		if (n == -1 || (!*lst && n == 0) || !buff)
+		if (n == -1 || (!*lst && n == 0))
 		{
 			if (n == -1)
 				ft_free_lst(*lst);
@@ -111,7 +115,7 @@ void	readlst(int fd, t_list **lst, t_list **current)
 			return ;
 		}
 		buff[n] = '\0';
-		append(lst, buff, current, n);
+		append(lst, buff, &current, n);
 		free(buff);
 	}
 }
@@ -120,18 +124,16 @@ char	*get_next_line(int fd)
 {
 	static t_list	*lst = NULL;
 	char			*line;
-	t_list			*current;
 
-	current = ft_getcurrentnode(lst);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	readlst(fd, &lst, &current);
+	readlst(fd, &lst);
 	if (!lst)
 		return (NULL);
 	line = NULL;
 	extract_line(lst, &line);
-	clean_lst(&lst, &current);
-	if (!line[0])
+	clean_lst(&lst);
+	if (!line || !line[0])
 	{
 		ft_free_lst(lst);
 		lst = NULL;
