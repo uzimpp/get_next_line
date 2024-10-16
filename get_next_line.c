@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/16 20:10:55 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:32:53 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	clean_lst(t_list **lst)
 {
-	t_list	*current;
+	t_list	*last;
 	char	*line;
 	int		i;
 
-	current = ft_getcurrentnode(*lst);
+	last = ft_getlastnode(*lst);
 	i = 0;
-	while (current->content[i] && current->content[i] != '\n')
+	while (last->content[i] && last->content[i] != '\n')
 		i++;
-	if (current->content[i] == '\n')
+	if (last->content[i] == '\n')
 		i++;
-	line = ft_strduplen(current->content + i);
+	line = ft_strduplen(last->content + i);
 	if (!line)
 		return ;
 	ft_free_lst(*lst);
@@ -100,7 +100,7 @@ void	readlst(int fd, t_list **lst)
 
 	n = 1;
 	current = *lst;
-	while (ft_isnotnewline(current) && n != 0)
+	while (ft_isnotnewline(*lst) && n != 0)
 	{
 		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buff)
@@ -133,7 +133,7 @@ char	*get_next_line(int fd)
 	line = NULL;
 	extract_line(lst, &line);
 	clean_lst(&lst);
-	if (!line || !line[0])
+	if (!line[0])
 	{
 		ft_free_lst(lst);
 		lst = NULL;
