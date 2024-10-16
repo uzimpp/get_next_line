@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/16 18:32:53 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:16:51 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	readlst(int fd, t_list **lst)
 
 	n = 1;
 	current = *lst;
-	while (ft_isnotnewline(*lst) && n != 0)
+	while (ft_isnotnewline(current) && n != 0)
 	{
 		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buff)

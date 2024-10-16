@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:58:36 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/16 17:45:47 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/16 21:16:22 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	append(t_list **lst, char *buff, t_list **current, int n);
 void	clean_lst(t_list **lst);
 void	extract_line(t_list *lst, char **line);
 
-int		ft_isnotnewline(t_list *lst);
+int		ft_isnotnewline(t_list *current);
 t_list	*ft_getlastnode(t_list *lst);
 void	ft_create_line(char **line, t_list *lst);
 void	ft_free_lst(t_list *lst);
