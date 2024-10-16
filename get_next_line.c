@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/16 16:15:59 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/16 18:32:53 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,54 +66,56 @@ void	extract_line(t_list *lst, char **line)
 	(*line)[j] = '\0';
 }
 
-void	append(t_list **lst, char *buff, int val)
+void	append(t_list **lst, char *buff, t_list **current, int n)
 {
 	int		i;
-	t_list	*current;
 	t_list	*node;
 
 	node = malloc(sizeof(t_list));
-	if (!node)
+	if (!node || !lst)
 		return ;
-	node->content = malloc(sizeof(char) * (val + 1));
+	node->content = malloc(sizeof(char) * (n + 1));
 	node->next = NULL;
 	if (!node->content)
 		return ;
 	i = 0;
-	while (buff[i] && i < val)
+	while (buff[i] && i < n)
 	{
 		node->content[i] = buff[i];
 		i++;
 	}
 	node->content[i] = '\0';
 	if (!*lst)
-	{
 		*lst = node;
-		return ;
-	}
-	current = ft_getlastnode(*lst);
-	current->next = node;
+	else
+		(*current)->next = node;
+	*current = node;
 }
 
 void	readlst(int fd, t_list **lst)
 {
 	char	*buff;
-	int		status;
+	int		n;
+	t_list	*current;
 
-	status = 1;
-	while (ft_isnotnewline(*lst) && status != 0)
+	n = 1;
+	current = *lst;
+	while (ft_isnotnewline(*lst) && n != 0)
 	{
 		buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buff)
 			return ;
-		status = (int)read(fd, buff, BUFFER_SIZE);
-		if (status == -1 || (!*lst && status == 0) || !status)
+		n = (int)read(fd, buff, BUFFER_SIZE);
+		if (n == -1 || (!*lst && n == 0))
 		{
+			if (n == -1)
+				ft_free_lst(*lst);
+			*lst = NULL;
 			free(buff);
 			return ;
 		}
-		buff[status] = '\0';
-		append(lst, buff, status);
+		buff[n] = '\0';
+		append(lst, buff, &current, n);
 		free(buff);
 	}
 }
