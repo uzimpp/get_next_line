@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:46:24 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/09 19:58:37 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/14 15:57:24 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,39 +47,51 @@ void	test_mandatory(void)
 	close(fd);
 }
 
-void	test_bonus(void)
+void	print_bonus(int *fds, int *ended)
 {
-	int		ended[3];
-	char	*str;
-	int		fds[3];
-	int		line;
 	int		i;
+	int		line;
+	char	*str;
 
-	fds[0] = open("tests/test1.txt", O_RDONLY);
-	fds[1] = open("tests/test2.txt", O_RDONLY);
-	fds[2] = open("tests/test3.txt", O_RDONLY);
+	i = 0;
 	line = 1;
-	for (i = 0; i < 3; i++)
-		ended[i] = 0;
 	while (!(ended[0] && ended[1] && ended[2]))
 	{
-		for (i = 0; i < 3; i++)
+		i = 0;
+		while (i < NUM_FILES)
 		{
 			str = get_next_line(fds[i]);
 			if (str)
 			{
-				printf("file %d, line %d: %s", i + 1, line++, str);
+				printf("file %d, line %d: %s", 1 + i++, line, str);
 				free(str);
 			}
 			else
 			{
-				printf("file %d, line %d: %s\n", i + 1, line++, str);
-				ended[i] = 1;
+				printf("file %d, line %d: %s\n", 1 + i, line, str);
+				ended[i++] = 1;
 			}
 		}
+		line++;
 	}
-	for (i = 0; i < 3; i++)
-		close(fds[i]);
+}
+
+void	test_bonus(void)
+{
+	int		i;
+	int		fds[NUM_FILES];
+	int		ended[NUM_FILES];
+
+	fds[0] = open("tests/test1.txt", O_RDONLY);
+	fds[1] = open("tests/test2.txt", O_RDONLY);
+	fds[2] = open("tests/test3.txt", O_RDONLY);
+	i = 0;
+	while (i < NUM_FILES)
+		ended[i++] = 0;
+	print_bonus(fds, ended);
+	i = 0;
+	while (i < NUM_FILES)
+		close(fds[i++]);
 }
 
 int	main(void)

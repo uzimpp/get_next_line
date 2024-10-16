@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/07 13:03:57 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:15:59 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	readlst(int fd, t_list **lst)
 		if (!buff)
 			return ;
 		status = (int)read(fd, buff, BUFFER_SIZE);
-		if (status == -1 || (!*lst && status == 0))
+		if (status == -1 || (!*lst && status == 0) || !status)
 		{
 			free(buff);
 			return ;
