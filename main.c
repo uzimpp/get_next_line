@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:46:24 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/14 15:57:24 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/17 07:43:47 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 // https://github.com/uzimpp/get_next_line
 
 // ==== Mandatory ====
-// cc -Wall -Wextra -Werror $(ls *.c *.h | grep -v '_bonus')
-// #include "get_next_line.h"
+// cc -Wall -Wextra -Werror $(ls *.c *.h | grep -v '_bonus') -D BUFFER_SIZE=1
+#include "get_next_line.h"
 
 // ==== Bonus ====
-// cc -Wall -Wextra -Werror *_bonus.c *_bonus.h main.c
-#include "get_next_line_bonus.h"
+// cc -Wall -Wextra -Werror *_bonus.c *_bonus.h main.c -D BUFFER_SIZE=1
+// #include "get_next_line_bonus.h"
 
 #ifndef NUM_FILES
 # define NUM_FILES 3
@@ -33,15 +33,15 @@ void	test_mandatory(void)
 	int		i;
 	int		line;
 
-	fd = open("./test.txt", O_RDONLY);
+	fd = open("./get_next_line.c", O_RDONLY);
 	i = 1;
 	line = 1;
 	while (1)
 	{
 		str = get_next_line(fd);
+		printf("file %d, line %d: %s", i, line++, str);
 		if (!str)
 			break ;
-		printf("file %d, line %d: %s", i++, line++, str);
 		free(str);
 	}
 	close(fd);
@@ -96,7 +96,7 @@ void	test_bonus(void)
 
 int	main(void)
 {
-	// test_mandatory();
-	test_bonus();
+	test_mandatory();
+	// test_bonus();
 	return (0);
 }

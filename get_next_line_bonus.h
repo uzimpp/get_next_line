@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:58:36 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/16 21:16:22 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/17 07:39:31 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
+# endif
+
+# ifndef MAX_FD
+#  define MAX_FD 1024
 # endif
 
 # include <unistd.h>
@@ -28,8 +32,8 @@ typedef struct s_list
 }	t_list;
 
 char	*get_next_line(int fd);
-void	readlst( int fd, t_list **lst);
-void	append(t_list **lst, char *buff, t_list **current, int n);
+int		readlst(int fd, t_list **lst);
+int		append(t_list **lst, char *buff, t_list **current, int n);
 void	clean_lst(t_list **lst);
 void	extract_line(t_list *lst, char **line);
 

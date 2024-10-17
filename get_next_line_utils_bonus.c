@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/16 21:12:56 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/17 07:25:27 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_isnotnewline(t_list *current)
 {
 	char	*content;
 
-	if (current == NULL)
+	if (!current)
 		return (1);
 	content = current->content;
 	while (*content)
@@ -70,8 +70,8 @@ void	ft_free_lst(t_list *lst)
 	current = lst;
 	while (current)
 	{
-		free(current->content);
 		next = current->next;
+		free(current->content);
 		free(current);
 		current = next;
 	}
@@ -83,11 +83,10 @@ char	*ft_strduplen(char *s1)
 	int		len;
 	char	*dst;
 
-	i = 0;
 	len = 0;
-	while (s1[i++])
+	while (s1[len])
 		len++;
-	dst = (char *) malloc((len + 1));
+	dst = malloc(sizeof(char) * (len + 1));
 	if (!dst)
 		return (NULL);
 	i = 0;
