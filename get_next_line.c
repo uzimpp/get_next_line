@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/17 07:21:24 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/20 11:43:59 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,12 @@ void	clean_lst(t_list **lst)
 	if (last->content[i] == '\n')
 		i++;
 	line = ft_strduplen(last->content + i);
+	ft_free_lst(*lst);
 	if (!line)
 	{
-		ft_free_lst(*lst);
 		*lst = NULL;
 		return ;
 	}
-	ft_free_lst(*lst);
 	*lst = malloc(sizeof(t_list));
 	if (!*lst)
 		return ((void)free(line));
@@ -52,10 +51,10 @@ void	extract_line(t_list *lst, char **line)
 	if (!*line)
 		return ;
 	j = 0;
-	while (lst != 0)
+	while (lst)
 	{
 		i = 0;
-		while (lst->content[i] != 0)
+		while (lst->content[i])
 		{
 			if (lst->content[i] == '\n')
 			{
@@ -115,9 +114,9 @@ int	readlst(int fd, t_list **lst)
 			free(buff);
 			if (n == -1)
 				ft_free_lst(*lst);
-			return (*lst = NULL, 0);
+			*lst = NULL;
+			return (0);
 		}
-		buff[n] = '\0';
 		if (!append(lst, buff, &current, n))
 			return (free(buff), 0);
 		free(buff);
@@ -127,7 +126,7 @@ int	readlst(int fd, t_list **lst)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*lst = NULL;
+	static t_list	*lst;
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -139,15 +138,12 @@ char	*get_next_line(int fd)
 	line = NULL;
 	extract_line(lst, &line);
 	if (!line)
-	{
-		ft_free_lst(lst);
-		return (lst = NULL, NULL);
-	}
+		return (ft_free_lst(lst), lst = NULL, NULL);
 	clean_lst(&lst);
 	if (!line[0])
 	{
-		ft_free_lst(lst);
-		return (lst = NULL, free(line), NULL);
+		free(line);
+		return (ft_free_lst(lst), lst = NULL, NULL);
 	}
 	return (line);
 }

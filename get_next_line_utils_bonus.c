@@ -6,11 +6,11 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:40:29 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/17 07:25:27 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/20 11:43:25 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_isnotnewline(t_list *current)
 {
