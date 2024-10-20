@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:46:24 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/17 07:51:15 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/20 12:15:07 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 
 // ==== Mandatory ====
 // cc -Wall -Wextra -Werror $(ls *.c *.h | grep -v '_bonus') -D BUFFER_SIZE=1
-// #include "get_next_line.h"
+#include "get_next_line.h"
 
 // ==== Bonus ====
 // cc -Wall -Wextra -Werror *_bonus.c *_bonus.h main.c -D BUFFER_SIZE=1
-#include "get_next_line_bonus.h"
+// #include "get_next_line_bonus.h"
 
 #ifndef NUM_FILES
 # define NUM_FILES 3
@@ -54,7 +54,6 @@ void	print_bonus(int *fds, int *ended)
 	int		line;
 	char	*str;
 
-	i = 0;
 	line = 1;
 	while (!(ended[0] && ended[1] && ended[2]))
 	{
@@ -73,6 +72,7 @@ void	print_bonus(int *fds, int *ended)
 				ended[i++] = 1;
 			}
 		}
+		printf("\n");
 		line++;
 	}
 }
@@ -84,7 +84,7 @@ void	test_bonus(void)
 	int		ended[NUM_FILES];
 
 	fds[0] = open("tests/test1.txt", O_RDONLY);
-	fds[1] = open("./get_next_line_bonus.c", O_RDONLY);
+	fds[1] = open("tests/test2.txt", O_RDONLY);
 	fds[2] = open("tests/test3.txt", O_RDONLY);
 	i = 0;
 	printf("\n\n=== Bonus part ===\n");
@@ -98,7 +98,7 @@ void	test_bonus(void)
 
 int	main(void)
 {
-	test_mandatory();
+	// test_mandatory();
 	test_bonus();
 	return (0);
 }

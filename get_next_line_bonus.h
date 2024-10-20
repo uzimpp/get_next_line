@@ -6,7 +6,7 @@
 /*   By: wkullana <wkullana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 20:58:36 by wkullana          #+#    #+#             */
-/*   Updated: 2024/10/17 07:39:31 by wkullana         ###   ########.fr       */
+/*   Updated: 2024/10/20 12:00:37 by wkullana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
 
 typedef struct s_list
 {
